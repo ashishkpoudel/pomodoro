@@ -46,6 +46,12 @@ import { SettingService } from 'src/app/core/services/setting.service';
         </div>
       </div>
 
+      <div class="row d-flex mt-2 mb-4">
+        <div class="col-12">
+          <mat-checkbox formControlName="sound">Sound</mat-checkbox>
+        </div>
+      </div>
+
       <div class="row my-2">
         <div class="col-12">
           <span class="form-field-label">Volume</span>
@@ -85,6 +91,7 @@ export class SettingsDialogComponent implements OnInit {
       longBreak: [null, Validators.required]
     }),
     theme: [null, Validators.required],
+    sound: [null, Validators.required],
     volume: [null, Validators.required]
   });
 

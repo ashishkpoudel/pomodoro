@@ -21,7 +21,6 @@ browser.runtime.onInstalled.addListener(() => {
 browser.alarms.onAlarm.addListener(alarm => {
   if (alarm.name === 'timer') {
     browser.browserAction.setBadgeText({text: ''});
-    console.log('done');
     browser.notifications.create({
       type: 'basic',
       iconUrl: browser.extension.getURL('/assets/icon.png'),

@@ -26,7 +26,7 @@ export class TimerService {
   start(timerType: TimerType) {
     this.settingService.getAll().subscribe(data => {
       const timer = new Timer();
-      timer.end = moment().add(1, 'minutes').valueOf();
+      timer.end = moment().add(data.pomodoro.pomodoro, 'minutes').valueOf();
       browser.alarms.create('timer', {
         when: timer.end
       });
