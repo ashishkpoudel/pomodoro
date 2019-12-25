@@ -1,0 +1,20 @@
+
+<mat-toolbar color="primary" id="inner_fixed">
+  <mat-toolbar-row class="d-flex justify-content-between">
+    <span>Pomodoro</span>
+    <button mat-button (click)="settingsClick()"><mat-icon>settings_applications</mat-icon> Settings</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<mat-tab-group mat-align-tabs="center" class="h-100" dynamicHeight>
+  <mat-tab label="Pomodoro">
+    <app-timer [timerType]="timerType.POMODORO"></app-timer>
+  </mat-tab>
+  <mat-tab label="Short Break">
+    <app-timer [timerType]="timerType.SHORT_BREAK"></app-timer>
+  </mat-tab>
+  <mat-tab label="Long Break">
+    <app-timer [timerType]="timerType.LONG_BREAK"></app-timer>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,23 @@
+{
+  "name": "Pomodoro",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Build an Extension with Angular",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_title": "Pomodoro"
+  },
+  "background": {
+    "scripts": [
+      "runtime.js",
+      "vendor.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
