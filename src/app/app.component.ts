@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { TimerType } from 'src/app/core/enums/timer-type';
+import { TimerService } from 'src/app/core/services/timer.service';
 import { SettingsDialogComponent } from './views/settings-dialog/settings-dialog.component';
-
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,13 @@ export class AppComponent {
 
   timerType = TimerType;
 
-  constructor(private matDialog: MatDialog) {
+  constructor(
+    private matDialog: MatDialog,
+    private timerService: TimerService
+  ) { }
+
+  timerTabClick(event: any) {
+    this.timerService.stop();
   }
 
   settingsClick() {

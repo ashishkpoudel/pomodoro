@@ -4,17 +4,17 @@ import * as moment from 'moment';
 
 import { TimerType } from 'src/app/core/enums/timer-type';
 import { TimerService } from 'src/app/core/services/timer.service';
-import { SettingService } from 'src/app/core/services/setting.service';
 
 @Component({
   selector: 'app-timer',
   template: `
     <div class="timer-wrapper">
       <div class="timer">
-        {{ timer }}
+        <span>{{ timerCount }}</span>
       </div>
       <div class="d-flex justify-content-center p-4">
-        <button (click)="togglePomodoro()" mat-raised-button>Start</button>
+        <button (click)="startTimer()" mat-raised-button>Start</button>
+        <button (click)="stopTimer()" mat-raised-button>Stop</button>
       </div>
     </div>
   `,
@@ -35,26 +35,29 @@ export class TimerComponent implements OnInit {
   @Input()
   timerType: TimerType;
 
-  timer = '00:00';
+  timerCount = '00:00';
 
   constructor(
-    private timerService: TimerService,
-    private settingService: SettingService
+    private timerService: TimerService
   ) { }
 
   ngOnInit() {
     setInterval(() => {
-      browser.alarms.get('timer').then(alarm => {
-        if (alarm !== undefined && alarm.name === 'timer') {
-          const diff = moment(alarm.scheduledTime).diff(moment());
+      const timer = JSON.parse(localStorage.getItem('timer'));
+      if (timer) {
+          const diff = moment(timer.end).diff(moment());
           const duration = moment.duration(diff).asMilliseconds();
-          this.timer = duration > 0 ? moment.utc(duration).format('mm:ss') : '00:00';
-        }
-      });
+          this.timerCount = duration > 0 ? moment.utc(duration).format('mm:ss') : '00:00';
+      }
     });
   }
 
-  togglePomodoro() {
-    this.timerService.start(this.timerType);
+  startTimer() {
+    this.timerService.start();
   }
+
+  stopTimer() {
+    this.timerService.stop();
+  }
+
 }

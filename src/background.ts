@@ -17,7 +17,6 @@ browser.runtime.onInstalled.addListener(() => {
   settingService.update(Setting.default()).subscribe();
 });
 
-
 browser.alarms.onAlarm.addListener(alarm => {
   if (alarm.name === 'timer') {
     browser.browserAction.setBadgeText({text: ''});
@@ -31,13 +30,12 @@ browser.alarms.onAlarm.addListener(alarm => {
 });
 
 setInterval(() => {
-  browser.alarms.get('timer').then(alarm => {
-    if (alarm !== undefined && alarm.name === 'timer') {
-      const diff = moment(alarm.scheduledTime).diff(moment());
+  const timer = JSON.parse(localStorage.getItem('timer'));
+  if (timer) {
+      const diff = moment(timer.end).diff(moment());
       const duration = moment.duration(diff).asMilliseconds();
       browser.browserAction.setBadgeText({text: duration > 0 ? moment.utc(duration).format('mm:ss') : '00:00'});
-    }
-  });
+  }
 });
 
 browser.browserAction.onClicked.addListener(() => {

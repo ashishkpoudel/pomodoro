@@ -7,7 +7,7 @@
 </mat-toolbar>
 
 
-<mat-tab-group mat-align-tabs="center" class="h-100" dynamicHeight>
+<mat-tab-group mat-align-tabs="center" class="h-100" dynamicHeight (click)="timerTabClick($event)">
   <mat-tab label="Pomodoro">
     <app-timer [timerType]="timerType.POMODORO"></app-timer>
   </mat-tab>

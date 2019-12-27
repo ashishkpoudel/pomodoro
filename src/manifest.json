@@ -6,7 +6,8 @@
   "permissions": [
     "storage",
     "alarms",
-    "notifications"
+    "notifications",
+    "contextMenus"
   ],
   "browser_action": {
     "default_title": "Pomodoro"
@@ -17,7 +18,7 @@
       "vendor.js",
       "background.js"
     ],
-    "persistent": false
-  },
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+    "persistent": false,
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  }
 }

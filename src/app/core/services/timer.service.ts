@@ -23,21 +23,31 @@ export class TimerService {
     );
   }
 
-  start(timerType: TimerType) {
+  get() {
+    return Timer.fromObject(JSON.stringify(localStorage.getItem('timer')));
+  }
+
+  start() {
     this.settingService.getAll().subscribe(data => {
       const timer = new Timer();
       timer.end = moment().add(data.pomodoro.pomodoro, 'minutes').valueOf();
-      browser.alarms.create('timer', {
-        when: timer.end
-      });
+      localStorage.setItem('timer', JSON.stringify(timer));
     });
   }
 
-  stop(timerType: TimerType) {
+  stop() {
     const timer = new Timer();
     timer.end = moment().valueOf();
-    browser.alarms.create('timer', {
-      when: timer.end
-    });
+    localStorage.setItem('timer', timer.end.toString());
+  }
+
+  reset() {
+    localStorage.removeItem('timer');
   }
 }
+
+
+25
+24
+23
+stop

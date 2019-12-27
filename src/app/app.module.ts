@@ -8,6 +8,7 @@ import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { TimerDirective } from './core/pipes/timer.directive';
 import { SettingService } from './core/services/setting.service';
 import { TimerService } from './core/services/timer.service';
 import { SettingsDialogComponent } from './views/settings-dialog/settings-dialog.component';
@@ -17,7 +18,8 @@ import { TimerComponent } from './views/timer/timer.component';
   declarations: [
     AppComponent,
     SettingsDialogComponent,
-    TimerComponent
+    TimerComponent,
+    TimerDirective
   ],
   imports: [
     BrowserModule,

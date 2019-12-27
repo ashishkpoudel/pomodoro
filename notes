@@ -1,8 +1,8 @@
 [To make angular run without webserver]
 ng build --prod --base-href
 
-ng build --base-href --prod  --output-hashing=none
-ng build --base-href --output-hashing=none
+ng build --aot --prod  --output-hashing=none
+ng build --aot --output-hashing=none --watch
 
 
 [Angular Resolve Service class]
