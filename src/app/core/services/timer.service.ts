@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, of, ReplaySubject } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { browser } from 'webextension-polyfill-ts';
@@ -27,7 +27,7 @@ export class TimerService {
     return Timer.fromObject(JSON.stringify(localStorage.getItem('timer')));
   }
 
-  start() {
+  start(timerType: TimerType) {
     this.settingService.getAll().subscribe(data => {
       const timer = new Timer();
       timer.end = moment().add(data.pomodoro.pomodoro, 'minutes').valueOf();
@@ -38,6 +38,7 @@ export class TimerService {
   stop() {
     const timer = new Timer();
     timer.end = moment().valueOf();
+    timer.is_paused = false;
     localStorage.setItem('timer', timer.end.toString());
   }
 
@@ -45,9 +46,3 @@ export class TimerService {
     localStorage.removeItem('timer');
   }
 }
-
-
-25
-24
-23
-stop

@@ -7,14 +7,23 @@
 </mat-toolbar>
 
 
-<mat-tab-group mat-align-tabs="center" class="h-100" dynamicHeight (click)="timerTabClick($event)">
-  <mat-tab label="Pomodoro">
+<mat-tab-group mat-align-tabs="center" class="h-100" dynamicHeight>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span (click)="tabClick()">Pomodoro</span>
+    </ng-template>
     <app-timer [timerType]="timerType.POMODORO"></app-timer>
   </mat-tab>
-  <mat-tab label="Short Break">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span (click)="tabClick()">Short Break</span>
+    </ng-template>
     <app-timer [timerType]="timerType.SHORT_BREAK"></app-timer>
   </mat-tab>
-  <mat-tab label="Long Break">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span (click)="tabClick()">Long Break</span>
+    </ng-template>
     <app-timer [timerType]="timerType.LONG_BREAK"></app-timer>
   </mat-tab>
 </mat-tab-group>

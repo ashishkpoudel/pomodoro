@@ -3,6 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 import * as moment from 'moment';
 
 import { SettingService } from 'src/app/core/services/setting.service';
+import { Timer } from './app/core/models/timer';
 import { Setting } from './app/core/models/setting';
 
 const injector = Injector.create({
@@ -12,6 +13,7 @@ const injector = Injector.create({
 const settingService: SettingService = injector.get(SettingService);
 
 browser.browserAction.setBadgeBackgroundColor({color: '#004d40'});
+browser.browserAction.setBadgeText({text: ''});
 
 browser.runtime.onInstalled.addListener(() => {
   settingService.update(Setting.default()).subscribe();
@@ -30,11 +32,17 @@ browser.alarms.onAlarm.addListener(alarm => {
 });
 
 setInterval(() => {
-  const timer = JSON.parse(localStorage.getItem('timer'));
-  if (timer) {
-      const diff = moment(timer.end).diff(moment());
-      const duration = moment.duration(diff).asMilliseconds();
-      browser.browserAction.setBadgeText({text: duration > 0 ? moment.utc(duration).format('mm:ss') : '00:00'});
+  try {
+    const timer = Timer.fromObject(JSON.parse(localStorage.getItem('timer')));
+    if (timer.isRunning()) {
+      // const diff = moment(timer.end - timer.duration).diff(moment());
+      // const duration = moment.duration(diff).asMilliseconds();
+      timer.duration =  moment(timer.end - timer.duration).valueOf();
+      localStorage.setItem('timer', JSON.stringify(timer));
+      browser.browserAction.setBadgeText({text: timer.duration > 0 ? moment.utc(timer.duration).format('mm:ss') : '00:00'});
+    }
+  } catch (e) {
+    // ignore
   }
 });
 

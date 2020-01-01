@@ -21,8 +21,8 @@ export class AppComponent {
     private timerService: TimerService
   ) { }
 
-  timerTabClick(event: any) {
-    this.timerService.stop();
+  tabClick() {
+    this.timerService.reset();
   }
 
   settingsClick() {
