@@ -1,7 +1,10 @@
+import * as moment from 'moment';
+
 export class Timer {
   end: number;
   duration = 0;
   is_paused = false;
+  paused?: number = null;
   type?: string;
 
   static fromObject(data: any): Timer {
@@ -10,6 +13,7 @@ export class Timer {
       timer.end = data.end;
       timer.duration = data.duration;
       timer.is_paused = data.is_paused;
+      timer.paused = data.paused;
       timer.type = data.type;
       return timer;
     } catch (e) {
@@ -18,18 +22,10 @@ export class Timer {
   }
 
   isRunning(): boolean {
-    return this.is_paused === false;
+    return !this.isPaused();
   }
 
   isPaused(): boolean {
-    return this.is_paused === true;
-  }
-
-  markPaused(): void {
-    this.is_paused = true;
-  }
-
-  markStart(): void {
-    this.is_paused = false;
+    return this.paused !== null;
   }
 }

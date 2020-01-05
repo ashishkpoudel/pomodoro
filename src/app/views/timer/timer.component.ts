@@ -48,24 +48,24 @@ export class TimerComponent implements OnInit {
     setInterval(() => {
       try {
         const timer = Timer.fromObject(JSON.parse(localStorage.getItem('timer')));
+        this.isPaused = timer.isPaused();
+        console.log(timer);
         if (timer.isRunning()) {
           const diff = moment(timer.end).diff(moment());
           const duration = moment.duration(diff).asMilliseconds();
           this.timerCount = duration > 0 ? moment.utc(duration).format('mm:ss') : '00:00';
         }
       } catch (e) {
-        // ignore
+        console.log(e);
       }
     });
   }
 
   startTimer() {
     this.timerService.start(this.timerType);
-    this.isPaused = false;
   }
 
   stopTimer() {
     this.timerService.stop();
-    this.isPaused = true;
   }
 }

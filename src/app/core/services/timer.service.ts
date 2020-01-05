@@ -29,17 +29,27 @@ export class TimerService {
 
   start(timerType: TimerType) {
     this.settingService.getAll().subscribe(data => {
-      const timer = new Timer();
-      timer.end = moment().add(data.pomodoro.pomodoro, 'minutes').valueOf();
+      const timer = this.get();
+      if (!timer.end) {
+        timer.end = moment().add(data.pomodoro.pomodoro, 'minutes').valueOf();
+      }
+      timer.paused = null;
       localStorage.setItem('timer', JSON.stringify(timer));
     });
   }
 
   stop() {
-    const timer = new Timer();
-    timer.end = moment().valueOf();
-    timer.is_paused = false;
+    const timer = this.get();
+    timer.end += moment().valueOf();
+    timer.paused = moment().valueOf();
     localStorage.setItem('timer', timer.end.toString());
+
+
+    //
+    // const timer = new Timer();
+    // timer.end = moment().valueOf();
+    // timer.is_paused = false;
+    // localStorage.setItem('timer', timer.end.toString());
   }
 
   reset() {

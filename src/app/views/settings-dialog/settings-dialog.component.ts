@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Setting } from 'src/app/core/models/setting';
@@ -122,4 +122,5 @@ export class SettingsDialogComponent implements OnInit {
         });
       });
   }
+
 }
