@@ -18,7 +18,7 @@ export class AppComponent {
 
   constructor(
     private matDialog: MatDialog,
-    private timerService: TimerService
+    private timerService: TimerService,
   ) { }
 
   tabClick() {

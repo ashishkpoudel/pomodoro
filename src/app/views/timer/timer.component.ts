@@ -22,6 +22,7 @@ import { TimerService } from 'src/app/core/services/timer.service';
   styles: [`
     .timer-wrapper {
       padding: 5px;
+      margin-top: 150px;
     }
 
     .timer-wrapper .timer {
@@ -49,14 +50,13 @@ export class TimerComponent implements OnInit {
       try {
         const timer = Timer.fromObject(JSON.parse(localStorage.getItem('timer')));
         this.isPaused = timer.isPaused();
-        console.log(timer);
         if (timer.isRunning()) {
           const diff = moment(timer.end).diff(moment());
           const duration = moment.duration(diff).asMilliseconds();
           this.timerCount = duration > 0 ? moment.utc(duration).format('mm:ss') : '00:00';
         }
       } catch (e) {
-        console.log(e);
+      // ignore
       }
     });
   }
